@@ -10,7 +10,7 @@ Beispiel-Output für (**pq-Formel)**:
 Gleichung:
 x^2 - 2 * x - 40 = 0
 
-Parameter:
+Faktoren:
 p = -2
 q = -40
 
@@ -25,7 +25,7 @@ Für den Fall dass es keine reelen Lösungen gibt soll die Ausgabe wie folgt aus
 Gleichung:
 3 * x^2 - 5 * x + 1 = 0
 
-Parameter:
+Faktoren:
 A = 3
 B = -5
 C = 1
