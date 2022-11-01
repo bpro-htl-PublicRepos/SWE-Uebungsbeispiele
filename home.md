@@ -2,6 +2,7 @@
 
 * [Nummern Invertieren](Mathematische Beispiele/Nummern Invertieren)
 * [Quadratische Gleichungen](Mathematische Beispiele/Quadratische Gleichungen)
+* [Wurztelberechnung nach Heron](Mathematische Beispiele/Wurztelberechnung nach Heron)
 
 ## Fortgeschrittenen mathematische Beispiele
 
