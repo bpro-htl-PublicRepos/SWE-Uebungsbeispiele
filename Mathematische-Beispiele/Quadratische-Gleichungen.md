@@ -15,8 +15,8 @@ p = -2
 q = -40
 
 Lösungen:
-x1 = 8.0
-x2 = -5.0
+x1 = 7.4
+x2 = -5.4
 ```
 
 Für den Fall dass es keine reelen Lösungen gibt soll die Ausgabe wie folgt aussehen (**ABC-Formel**):
