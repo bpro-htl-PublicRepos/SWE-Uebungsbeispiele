@@ -1,13 +1,17 @@
 ## Einfache mathematische Beispiele
 
-* [Nummern Invertieren](Mathematische Beispiele/Nummern Invertieren)
-* [Quadratische Gleichungen](Mathematische Beispiele/Quadratische Gleichungen)
-* [Wurzelberechnung nach Heron](Mathematische Beispiele/Wurzelberechnung nach Heron)
+* [Nummern Invertieren](Mathematische%20Beispiele/Nummern%20Invertieren)
+* [Quadratische Gleichungen](Mathematische%20Beispiele/Quadratische%20Gleichungen)
+* [Wurzelberechnung nach Heron](Mathematische%20Beispiele/Wurzelberechnung%20nach%20Heron)
 
 ## Fortgeschrittenen mathematische Beispiele
 
-* [Sieb des Eratosthenes](Mathematische Beispiele/Sieb des Eratosthenes)
+* [Sieb des Eratosthenes](Mathematische%20Beispiele/Sieb%20des%20Eratosthenes)
 
 ## Einfache allgemeine Beispiele
 
-* [Haushaltsversicherung](Allgemeine Beispiele/Haushaltsversicherung)
+* [Haushaltsversicherung](Allgemeine%20Beispiele/Haushaltsversicherung)
+
+## Java Swing Beispiele
+
+* [Tic Tac Toe mit Swing GUI](Java%20Swing/TicTacToe)
