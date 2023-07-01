@@ -14,4 +14,4 @@
 
 ## Java Swing Beispiele
 
-* [TicTacToe mit Swing GUI](Java%20Swing/TicTacToe)
+* [TicTacToe mit Swing GUI](Java-Swing/TicTacToe-mit-Java-Swing)
