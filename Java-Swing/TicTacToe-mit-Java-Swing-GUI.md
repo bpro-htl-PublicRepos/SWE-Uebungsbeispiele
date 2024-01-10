@@ -100,6 +100,9 @@ Die Java Swing GUI wird Schritt für Schritt basierend auf dem soeben programmie
 ```java
 import javax.swing.*;
 
+private static final int GAP = 5;
+private static final int BUTTON_SIZE = 100;
+
 public class TicTacToeGUI extends JFrame {
     public TicTacToeGUI() {
         super("TicTacToe das Spiel !!!");
@@ -158,8 +161,6 @@ GUI Elemente werden in Swing häufig mit Hilfe des Standardcontainers [JPanel](h
 Die Anordnung der 2 Bereiche (Spielfeld und Kontrollbereich) erfolgt mit Hilfe des [BorderLayouts](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/java/awt/BorderLayout.html), dass den jeweiligen Bereich (bei uns `mainPanel`) in 5 Bereiche: oben (`NORTH`), unten (`SOUTH`), links (`WEST`), rechts (`EAST`) und die Mitte (`CENTER`). Da unsere Bereiche untereinander liegen, haben wir oben (`NORTH`) und unten (`SOUTH`) gewählt. `GAP` ist der Abstand zwischen den Elementen.
 
 ```java
-private static final int GAP = 5;
-
 private void initFrame() {
     JPanel mainPanel = new JPanel();
     mainPanel.setLayout(new BorderLayout(TicTacToeGUI.GAP, TicTacToeGUI.GAP));
@@ -186,7 +187,7 @@ public TicTacToeGUI() {
 }
 ```
 
-GUI_BaseLayout.png
+![GUI_BaseLayout](uploads/170a1577975b5b4e9317c34bdf5def79/GUI_BaseLayout.png)
 
 ## Das Spielfeld
 
@@ -204,14 +205,9 @@ Der Code für unsere eigene `JButtonTicTacToe` schaut wie folgt aus:
 ```java
 public class JButtonTicTacToe extends JButton {
 
-    public static final String ICON_EMPTY = "resources/empty.png";
-    public static final String ICON_FIRST_PLAYER = "resources/cross.png";
-    public static final String ICON_SECOND_PLAYER = "resources/circle.png";
-
     private Icon iconEmpty;
     private Icon iconFirstPlayer;
     private Icon iconSecondPlayer;
-
 
     public final int ROW;
     private final int COL;
@@ -225,10 +221,21 @@ public class JButtonTicTacToe extends JButton {
         this.setBorderPainted(false);
         this.setPreferredSize(new Dimension(size, size));
 
-        this.setEmpty();
+        this.iconEmpty = this.createImageIcon("resources/empty.png");
+        this.iconFirstPlayer = this.createImageIcon("resources/cross.png");
+        this.iconSecondPlayer = this.createImageIcon("resources/circle.png");
+
+        this.setFree();
     }
 
-    public void setEmpty() {
+    private ImageIcon createImageIcon(String filename) {
+        ImageIcon imageIcon = new ImageIcon(filename);
+        Image image = imageIcon.getImage();
+        Image newImg = image.getScaledInstance(TicTacToeGUIReference.BUTTON_SIZE, TicTacToeGUIReference.BUTTON_SIZE, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(newImg);
+    }
+
+    public void setFree() {
         this.setIcon(this.iconEmpty);
     }
 
@@ -242,16 +249,75 @@ public class JButtonTicTacToe extends JButton {
 }
 ```
 
-Jetzt müssen wir das Spielfeld nur noch in der `initFrame()` Methode initialisieren:
-```java
-boardPanel.setLayout(new GridLayout(3, 3, TicTacToeGUI.GAP, TicTacToeGUI.GAP));
-for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-        JButtonTicTacToe newButton = new JButtonTicTacToe(i, j, TicTacToeGUI.BUTTON_SIZE);
-        //newButton.addActionListener(e -> this.actionOnButtonPressed(newButton));
-        boardPanel.add(newButton);
-    }
-}
-
 Im Gegensatz zum `BorderLayout` kann man beim [GridLayout](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/java/awt/GridLayout.html) die Anzahl der Felder (Zeilen und Spalten) selber definieren. Da TicTacToe auf einem 3x3 Spielfeld gespielt wird, hat auch unser Grid eine größe von 3x3. Die hinzugefügten Buttons werden dann automatisch Feld für Feld zeilenweise hinzugefügt. Der `ActionListener` ist noch auskommentiert und wird später im Tutorium beschrieben.
 
+Unser GUI schaut jetzt wie folgt aus:
+
+![GUI_Grid](uploads/49c4517d47aa5c8b2c00973e8623a4cc/GUI_Grid.png)
+
+## Die Control Buttons
+
+Die Buttons für die Spielsteuerung ganz ähnlich zu den Buttons des Spielfelds in der `initFrame()` Methode hinzugefügt. Wir haben 2 Buttons:
+1) **RESET**: startet ein neues Speil
+2) **EXIT**: beendet das Programm mit **System.exit(0)**
+
+```java
+ctrlPanel.setLayout(new GridLayout(1, 2, TicTacToeGUI.GAP, TicTacToeGUI.GAP));
+JButton resetButton = new JButton();
+resetButton.setText("Reset");
+resetButton.setPreferredSize(new Dimension(1, TicTacToeGUIReference.BUTTON_SIZE / 2));
+//resetButton.addActionListener(e -> this.resetGame());
+ctrlPanel.add(resetButton);
+
+JButton exitButton = new JButton();
+exitButton.setText("Exit");
+exitButton.setPreferredSize(new Dimension(1, TicTacToeGUIReference.BUTTON_SIZE / 2));
+exitButton.addActionListener(e -> System.exit(0));
+ctrlPanel.add(exitButton);
+```
+
+Auch hier wird der `ActionListener` für das Zurücksetzen des Spiels erst später behandelt. Der **Exit** Button kann das Programm aber schon beenden.
+
+![GUI_CTRL](uploads/506583b85710a925d13549bfc1a58df9/GUI_CTRL.png)
+
+## Kosmetische Verbesserungen
+
+Irgendwie schaut unser Design - obwohl wir sowohl beim Spielfeld, wie auch im Kontrollbereich, Größen für die Buttons angegeben haben - verzerrt aus. Das liegt daran, dass sich Swing Layouts automatisch an die Größe des Fensters anpassen, d.h. sie ignorieren die Vorgaben, die wir in unserer Implementierung vorgegeben haben. Das kann aber durch wenige Einstellungen unseres `JFrames` in der **main()** Methode angepasst werden:
+
+```java
+public static void main(String[] args) {
+    JFrame frame = new TicTacToeGUIReference();
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //frame.setSize(500, 500);
+    frame.pack();
+    frame.setResizable(false);
+    frame.setLocationRelativeTo(null);
+    //frame.setLocationByPlatform(true);
+    frame.setVisible(true);
+}
+```
+
+Anstatt der fixen Fenstergröße (500x500) geben wir mit  **frame.pack()** an, dass sich unser Frame der Größe des Inhalts anpassen soll. Zusätzlich wollen wir, dass der Benutzer die Größe unseres Fensters nicht ändern darf (**frame.setResizable(false)**) und das Fenster zentriert am Monitor geöffnet werden soll (**frame.setLocationRelativeTo(null)**). Zusätzlich können wir die Farben, die wir nur für die Sichtbarkeit des Layouts eingeführt haben (Gelb und Rot) auskommentieren.
+
+Zu allerletzt können wir noch das Icon links oben im Fenster ändern:
+```
+public TicTacToeGUI() {
+    super("TicTacToe das Spiel !!!");
+    
+    ImageIcon img = new ImageIcon("resources/HTBLuVA_Salzburg_Logo.jpg");
+    this.setIconImage(img.getImage());
+
+    this.initFrame();
+}
+```
+
+Nach diesen Änderungen hat unser Fenster jetzt das gewünschte Aussehen:
+
+GUI_Final.png
+
+## Die Spiellogik
+
+Nachdem wir die passende GUI für unser Spiel erstellt haben, können wir uns der Spiellogik widmen. Wir brauchen:
+1) Ein Attribut für unsere TicTacToe Klasse **Game**
+2) Eine Methode **initGame()**, die das Spiel für uns initialisiert
+3) Eine Methode **resetGame()**, die das Spiel zurücksetzt
