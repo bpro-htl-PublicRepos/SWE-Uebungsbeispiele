@@ -409,7 +409,7 @@ Für die Anzeige ob ein Spiel Gewonnen wurde, oder es ohne Sieger geendet hat wi
 - ...
 anbietet. In unserem Fall haben wir die Defaultoption mit OK Button gewählt.
 
-GUI_WIN.png
+![GUI_WIN](uploads/c4aa809b2cd00fc430d14ca3cdb2f26c/GUI_WIN.png)
 
 Damit das Spiel nach dem Spielende nicht weiter verändert werden kann, werden die Buttons des Spielfelds deaktiviert. Für die Übersichtlichkeit des Codes wird diese Aufgabe in eine eigene Methode ausgelagert:
 ```java
@@ -448,3 +448,5 @@ private void resetBoardButtons() {
 **ACHTUNG** nicht vergessen den `ActionListener` für den Reset Button zu aktivieren (Kommentar entfernen)!
 
 Jetzt sollte unsere GUI voll einsatzbereit sein. Die Files für die GUI können hier heruntergeladen werden:
+
+![TicTacToe_GUI.tar](uploads/5eeb8c331fc5e617677f1d0c7aefa204/TicTacToe_GUI.tar)
