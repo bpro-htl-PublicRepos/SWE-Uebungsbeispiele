@@ -191,7 +191,7 @@ public TicTacToeGUI() {
 
 ## Das Spielfeld
 
-Das Spielfeld besteht aus 3x3 Feldern, die in unserer GUI mit Hilfe von [JButtons]() dargestellt werden. Während des Spielens von TicTacToe ist es notwendig zu wissen welcher Button gedrückt wurde (Position am Spielfeld). Da der Standardbutton diese Funktionalität nicht bietet, müssen wir ihn um diese Funktionalität erweitern. Dafür erstellen wir unsere eigene Button Klasse `JButtonTicTacToe` und ergänzen die fehlende Funktionalität (eigene Attribute für die Position - Zeile bzw. Spalte - des Buttons).
+Das Spielfeld besteht aus 3x3 Feldern, die in unserer GUI mit Hilfe von [JButtons](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/JButton.html) dargestellt werden. Während des Spielens von TicTacToe ist es notwendig zu wissen welcher Button gedrückt wurde (Position am Spielfeld). Da der Standardbutton diese Funktionalität nicht bietet, müssen wir ihn um diese Funktionalität erweitern. Dafür erstellen wir unsere eigene Button Klasse `JButtonTicTacToe` und ergänzen die fehlende Funktionalität (eigene Attribute für die Position - Zeile bzw. Spalte - des Buttons).
 
 Im Zuge dessen, können wir auch die Darstellung der Felder anpassen. Die Zustände mit Hilfe von Symbolen (Bilder für leer, Kreuz, Kreis) angezeigt werden. Für die Zustandsänderungen wollen wir 3 Methoden zur Verfügung stellen:
 1. **setFree()**: zeigt einen leeren Button an
@@ -205,12 +205,12 @@ Der Code für unsere eigene `JButtonTicTacToe` schaut wie folgt aus:
 ```java
 public class JButtonTicTacToe extends JButton {
 
-    private Icon iconEmpty;
-    private Icon iconFirstPlayer;
-    private Icon iconSecondPlayer;
+    private final  Icon iconEmpty;
+    private final  Icon iconFirstPlayer;
+    private final  Icon iconSecondPlayer;
 
     public final int ROW;
-    private final int COL;
+    public final int COL;
 
     public JButtonTicTacToe(int row, int col, int size) {
         this.ROW = row;
@@ -245,6 +245,26 @@ public class JButtonTicTacToe extends JButton {
 
     public void setPlayer2() {
         this.setIcon(this.iconSecondPlayer);
+    }
+}
+```
+
+Jetzt müssen wir unsere `JButtonTicTacToe` Buttons nur noch der GUI hinzufügen. Da wir die Buttons Später noch brauchen, legen wir sie in einem 3x3 Feld als Attribut der Klasse ab.
+
+```java
+private JButtonTicTacToe[][] boardButtons;
+```
+
+```java
+int size = 3;
+this.boardButtons = new JButtonTicTacToe[size][size];
+boardPanel.setLayout(new GridLayout(size, size, TicTacToeGUI.GAP, TicTacToeGUI.GAP));
+for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+        JButtonTicTacToe newButton = new JButtonTicTacToe(i, j, TicTacToeGUI.BUTTON_SIZE);
+        this.boardButtons[i][j] = newButton;
+        //newButton.addActionListener(e -> this.actionOnBoardButtonPressed(newButton));
+        boardPanel.add(newButton);
     }
 }
 ```
@@ -313,11 +333,118 @@ public TicTacToeGUI() {
 
 Nach diesen Änderungen hat unser Fenster jetzt das gewünschte Aussehen:
 
-GUI_Final.png
+![GUI_Final](uploads/1ae033d69733b6a18c84b19c963d4be3/GUI_Final.png)
 
 ## Die Spiellogik
 
 Nachdem wir die passende GUI für unser Spiel erstellt haben, können wir uns der Spiellogik widmen. Wir brauchen:
-1) Ein Attribut für unsere TicTacToe Klasse **Game**
-2) Eine Methode **initGame()**, die das Spiel für uns initialisiert
-3) Eine Methode **resetGame()**, die das Spiel zurücksetzt
+1) Ein Attribut für unsere TicTacToe Klasse **Game**:
+```java
+private Game game;
+```
+2) Eine Methode **initGame()**, die das Spiel für uns initialisiert:
+```java
+private void initGame() {
+    this.game = new Game("Spieler 1", "Spieler 2");
+}
+```
+3) Einen `ActionListener`, der auf Klicks auf die Felder des Spielfelds reagiert:
+4) Eine Methode **resetGame()**, die das Spiel zurücksetzt:
+5) Die Initialisierung des Spiels im Konstruktor:
+```java
+public TicTacToeGUI() {
+    super("TicTacToe das Spiel !!!");
+
+    ImageIcon img = new ImageIcon("resources/HTBLuVA_Salzburg_Logo.jpg");
+    this.setIconImage(img.getImage());
+
+    this.initFrame();
+    this.initGame();
+}
+```
+
+### `ActionListener` für Klicks auf das Spielfeld
+
+Die Klicks auf die Buttons des Spielfelds sind für den [Ablauf des Spiels](#Spielverlauf) zuständig. Nach jedem Klick werden folgende Schritte ausgeführt:
+1) Prüfen ob das Feld vom Spieler belegt werden darf
+2) Überprüfen ob nach dem Belegen eines Feldes das Spiel gewonnen oder verloren wurde
+3) Den Spieler wechseln
+
+Wir wollen diesen Ablauf schrittweise in unsere Benutzeroberfläche einbauen.
+
+Als erstes wollen wir auf Klicks des Spielers reagieren und das Symbol des jeweiligen Spielers anzeigen. Dafür erstellen wir eine Funktion **actionOnBoardButtonPressed()**, die den jeweiligen Button als Argument übernimmt. Wenn das Feld noch frei ist, so soll das Zeichen gesetzt, und der nächste Spieler ausgewählt werden. Die dafür notwendigen Methoden stellt uns die Klasse **Game** zur Verfügung:
+```java
+private void actionOnBoardButtonPressed(JButtonTicTacToe button) {
+    if (this.game.placeToken(button.ROW, button.COL)) {
+        if (this.game.getPlayerToken() == Game.TOKEN_FIRST_PLAYER) {
+            button.setPlayer1();
+        } else {
+            button.setPlayer2();
+        }
+        this.game.changePlayer();
+    }
+}
+```
+
+**ACHTUNG** nicht vergessen den `ActionListener` beim Anlegen der Buttons zu aktivieren (Kommentar entfernen)!
+
+Im nächsten Schritt wollen wir prüfen ob das Spiel zu Ende ist (Sieg oder Unentschieden). Diese Überprüfung muss vor dem Spielerwechsel eingefügt werden:
+```java
+if (this.game.checkIfStoneWinsGame(button.ROW, button.COL)) {
+    JOptionPane.showConfirmDialog(null, String.format("%s hat gewonnen!!!", this.game.getPlayerName()), "SIEG", JOptionPane.DEFAULT_OPTION);
+    this.disableBoardButtons();
+} else if (this.game.noFurtherMovesPossible()) {
+    JOptionPane.showConfirmDialog(null, "Unentschieden", "UNENTSCHIEDEN", JOptionPane.DEFAULT_OPTION);
+    this.disableBoardButtons();
+} else {
+    this.game.changePlayer();
+}
+```
+
+Für die Anzeige ob ein Spiel Gewonnen wurde, oder es ohne Sieger geendet hat wird ein eigenes Fenster vom Typ [JOptionPane](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/JOptionPane.html) verwendet.
+
+`JOptionPane` ist das Standardialogfenster, der verschiedene Standardoptionen wir z.B.
+- nur ein OK Button
+- OK und Abbrecken
+- ...
+anbietet. In unserem Fall haben wir die Defaultoption mit OK Button gewählt.
+
+GUI_WIN.png
+
+Damit das Spiel nach dem Spielende nicht weiter verändert werden kann, werden die Buttons des Spielfelds deaktiviert. Für die Übersichtlichkeit des Codes wird diese Aufgabe in eine eigene Methode ausgelagert:
+```java
+private void disableBoardButtons() {
+    for (JButton[] row : this.boardButtons) {
+        for (JButton button : row) {
+            button.setEnabled(false);
+        }
+    }
+}
+```
+
+### Neues Spiel erstellen
+
+Wann immer der Spieler auf den Reset-Button drückt soll - unabhängig vom Spielstand - ein neues Spiel erstellt werden. Dafür muss ein neues Spiel initialisiert werden (dafür haben wir schon eine Funktion) und die Buttons in ihren Ausgangszustand (leere Felder) gebracht werden.
+
+```java
+private void resetGame() {
+    this.resetBoardButtons();
+    this.initGame();
+}
+```
+
+Das zurücksetzen der Buttons in den Ausgangszustand wurde dabei wieder in eine eigene Funktion ausgelagert:
+```java
+private void resetBoardButtons() {
+    for (JButtonTicTacToe[] row : this.boardButtons) {
+        for (JButtonTicTacToe button : row) {
+            button.setFree();
+            button.setEnabled(true);
+        }
+    }
+}
+```
+
+**ACHTUNG** nicht vergessen den `ActionListener` für den Reset Button zu aktivieren (Kommentar entfernen)!
+
+Jetzt sollte unsere GUI voll einsatzbereit sein. Die Files für die GUI können hier heruntergeladen werden:
