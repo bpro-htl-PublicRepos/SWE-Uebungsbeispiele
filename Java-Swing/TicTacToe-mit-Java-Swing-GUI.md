@@ -449,4 +449,4 @@ private void resetBoardButtons() {
 
 Jetzt sollte unsere GUI voll einsatzbereit sein. Die Files für die GUI können hier heruntergeladen werden:
 
-![TicTacToe_GUI.tar](uploads/5eeb8c331fc5e617677f1d0c7aefa204/TicTacToe_GUI.tar)
+[TicTacToe_GUI.tar](uploads/5eeb8c331fc5e617677f1d0c7aefa204/TicTacToe_GUI.tar)
