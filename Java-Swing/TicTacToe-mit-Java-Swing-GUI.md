@@ -250,7 +250,7 @@ public class JButtonTicTacToe extends JButton {
 }
 ```
 
-Jetzt müssen wir unsere `JButtonTicTacToe` Buttons nur noch der GUI hinzufügen. Das passiert in der 'initFrame()` Methode. Da wir die Buttons Später noch brauchen, legen wir sie in einem 3x3 Feld als Attribut der Klasse ab.
+Jetzt müssen wir unsere `JButtonTicTacToe` Buttons nur noch der GUI hinzufügen. Das passiert in der `initFrame()` Methode. Da wir die Buttons Später noch brauchen, legen wir sie in einem 3x3 Feld als Attribut der Klasse ab.
 
 ```java
 private JButtonTicTacToe[][] boardButtons;
