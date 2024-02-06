@@ -232,7 +232,7 @@ public class JButtonTicTacToe extends JButton {
     private ImageIcon createImageIcon(String filename) {
         ImageIcon imageIcon = new ImageIcon(filename);
         Image image = imageIcon.getImage();
-        Image newImg = image.getScaledInstance(TicTacToeGUIReference.BUTTON_SIZE, TicTacToeGUIReference.BUTTON_SIZE, java.awt.Image.SCALE_SMOOTH);
+        Image newImg = image.getScaledInstance(TicTacToeGUI.BUTTON_SIZE, TicTacToeGUI.BUTTON_SIZE, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
     }
 
@@ -286,13 +286,13 @@ Die Buttons für die Spielsteuerung ganz ähnlich zu den Buttons des Spielfelds 
 ctrlPanel.setLayout(new GridLayout(1, 2, TicTacToeGUI.GAP, TicTacToeGUI.GAP));
 JButton resetButton = new JButton();
 resetButton.setText("Reset");
-resetButton.setPreferredSize(new Dimension(1, TicTacToeGUIReference.BUTTON_SIZE / 2));
+resetButton.setPreferredSize(new Dimension(1, TicTacToeGUI.BUTTON_SIZE / 2));
 //resetButton.addActionListener(e -> this.resetGame());
 ctrlPanel.add(resetButton);
 
 JButton exitButton = new JButton();
 exitButton.setText("Exit");
-exitButton.setPreferredSize(new Dimension(1, TicTacToeGUIReference.BUTTON_SIZE / 2));
+exitButton.setPreferredSize(new Dimension(1, TicTacToeGUI.BUTTON_SIZE / 2));
 exitButton.addActionListener(e -> System.exit(0));
 ctrlPanel.add(exitButton);
 ```
@@ -307,7 +307,7 @@ Irgendwie schaut unser Design - obwohl wir sowohl beim Spielfeld, wie auch im Ko
 
 ```java
 public static void main(String[] args) {
-    JFrame frame = new TicTacToeGUIReference();
+    JFrame frame = new TicTacToeGUI();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //frame.setSize(500, 500);
     frame.pack();
