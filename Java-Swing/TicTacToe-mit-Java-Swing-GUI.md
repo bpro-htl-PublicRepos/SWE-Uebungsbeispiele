@@ -232,7 +232,7 @@ public class JButtonTicTacToe extends JButton {
     private ImageIcon createImageIcon(String filename) {
         ImageIcon imageIcon = new ImageIcon(filename);
         Image image = imageIcon.getImage();
-        Image newImg = image.getScaledInstance(TicTacToeGUI.BUTTON_SIZE, TicTacToeGUI.BUTTON_SIZE, java.awt.Image.SCALE_SMOOTH);
+        Image newImg = image.getScaledInstance(this.getPreferredSize().width, this.getPreferredSize().height, java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
     }
 
