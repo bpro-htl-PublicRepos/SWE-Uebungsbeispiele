@@ -100,10 +100,11 @@ Die Java Swing GUI wird Schritt für Schritt basierend auf dem soeben programmie
 ```java
 import javax.swing.*;
 
-private static final int GAP = 5;
-private static final int BUTTON_SIZE = 100;
-
 public class TicTacToeGUI extends JFrame {
+
+    private static final int GAP = 5;
+    private static final int BUTTON_SIZE = 100;
+
     public TicTacToeGUI() {
         super("TicTacToe das Spiel !!!");
     }
