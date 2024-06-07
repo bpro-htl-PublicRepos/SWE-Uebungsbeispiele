@@ -45,7 +45,7 @@ Die Klassen können mit ihren Beziehungen grafisch wie folgt dargestellt werden:
 
 ![Klassen_und_Beziehungen](uploads/4e93b1d975468c219bad05a54758b4b8/Klassen_und_Beziehungen.png){width="550"}
 
-Da TicTacToe sehr einfach ist, werden wir auf die Klasse Token verzichten und den Spieler direkt das Feld besetzen lassen.
+Da TicTacToe sehr einfach ist, verzichten wir auf die Klasse Token und lassen den Spieler direkt das Feld besetzen.
 
 # Das Klassendiagramm
 
@@ -57,7 +57,7 @@ Da TicTacToe sehr einfach ist, werden wir auf die Klasse Token verzichten und de
 
 ## Player
 
-Der Konstruktor soll den Namen sowie das Zeichen des Spielers übernehmen. Beide Attribute sind von außen nur lesend erreichbar.
+Der Konstruktor übernimmt den Namen sowie das Zeichen des Spielers. Beide Attribute sind von außen nur lesend erreichbar.
 
 Die Methode **toString()** gibt eine passende Repräsentation des Spielernamens (inklusive Symbol) zurück.
 
@@ -66,18 +66,18 @@ Die Methode **toString()** gibt eine passende Repräsentation des Spielernamens 
 In der Klasse **Field** wird lediglich der Spieler, der das Feld besetzt, gespeichert. Initial soll das Feld nicht belegt (frei) sein.
 
 * **isEmpty()** ermittelt ob das Feld frei ist.
-* **setPlayer()** versucht das Feld mit dem übergebenen Spieler zu besetzten. ACHTUNG: das ist nur möglich, wenn das Feld leer ist. Der Rückgabewert gibt an, ob der Spieler erfolgreich gesetzt werden konnte.
-* **isTakenByPlayer()** überprüft ob das Feld mit vom übergebenen Spieler besetzt ist
+* **setPlayer()** versucht das Feld mit dem übergebenen Spieler zu besetzten. ACHTUNG: das ist nur möglich, wenn das Feld leer ist. Der Rückgabewert gibt an ob das Feld erfolgreich besetzt werden konnte.
+* **isTakenByPlayer()** überprüft ob das Feld vom übergebenen Spieler besetzt ist
 * **getToken()** liefert das Zeichen des Spielers auf dem Feld zurück. Ist das Feld leer, so soll ein entsprechendes Zeichen (z.B. ein Leerzeichen) zurückgegeben werden.
 
 ## Board
 
-Die Klasse **Board** repräsentiert das ganze 3x3 Spielfeld. Die einzelnen Felder sind Objekten der Klasse **Field**.
+Die Klasse **Board** repräsentiert das ganze 3x3 Spielfeld. Die einzelnen Felder sind Objekte der Klasse **Field**.
 
 * **isFieldEmpty()** überprüft ob das Feld der angegebenen Indizes leer ist. Die Übergabeparameter sollen - wie in allen anderen Methoden auch - auf ihre Gültigkeit überprüft werden.
-* **placeToken()** versucht den Spieler auf dem entsprechenden Feld zu setzen. War das setzen erfolgreich, so wird **true** zurückgegeben werden, wenn nicht dann **false**.
+* **placeToken()** versucht den Spieler auf dem entsprechenden Feld zu setzen. War das setzen erfolgreich, so wird **true** zurückgegeben, wenn nicht dann **false**.
 * **emptyFieldExists()** überprüft ob zumindest ein Feld des Spiels noch leer ist.
-* **getRow()**, **getCol()**, **getMainDiagonal()**, **getSecondaryDiagonal()** liefern jeweils die 3 relevanten Felder als **Field** Array zurück
+* **getRow()**, **getCol()**, **getMainDiagonal()**, **getSecondaryDiagonal()** liefert die 3 jeweils relevanten Felder als **Field** Array zurück
 * **print()** gibt das Spielfeld auf der Commandline aus.
 
 ## Game
