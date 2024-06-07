@@ -145,10 +145,10 @@ Am Ende soll unsere GUI wie folgt aussehen:
 
 Das Fenster ist in 2 Teile aufgeteilt:
 
-1. Den Bereich für das Spielfeld: Das Spielfeld setzt sich aus Buttons zusammen, die in einem 3x3 Grid angeordnet sind. Die Zeichen werden mit Hilfe von Grafiken (Icons) angezeigt.
+1. Den Bereich für das Spielfeld: Das Spielfeld setzt sich aus Buttons, die in einem 3x3 Grid angeordnet sind, zusammen. Die Zeichen werden mit Hilfe von Grafiken (Icons) angezeigt.
 2. Den Bereich für die Kontrollbuttons: Es gibt lediglich 2 Buttons
    - **Exit**: Beendet das Programm mit **System.exit(0)**
-   - **Reset**: Startet zu jedem Zeitpunkt (egal ob das Spiel beendet oder nicht) ein neues Spiel
+   - **Reset**: Startet zu jedem Zeitpunkt (egal ob das Spiel beendet wurde oder nicht) ein neues Spiel
 
 Damit die Implementierung des Spiels 1:1 mit den Anweisungen übereinstimmt, findest du hier eine Beispielversion des Spiels:
 
@@ -159,7 +159,7 @@ Damit die Implementierung des Spiels 1:1 mit den Anweisungen übereinstimmt, fin
 
 GUI Elemente werden in Swing häufig mit Hilfe des Standardcontainers [JPanel](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/javax/swing/JPanel.html) gruppiert und angeordnet. Diesem Prinzip wollen wir auch in unserem Tutorium folgen und zuerst das Grundlayout (die Struktur) unserer GUI mit Hilfe von Containern erstellen. Damit das Layout gut sichtbar ist, sind den Containern vorerst leicht unterscheidbare Farben zugewiesen. Für eine bessere Übersichtlichkeit werden zusammengehörende Aufgaben jeweils in eigene Methoden auslagert.
 
-Die Anordnung der 2 Bereiche (Spielfeld und Kontrollbereich) erfolgt mit Hilfe des [BorderLayouts](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/java/awt/BorderLayout.html), dass den jeweiligen Bereich (bei uns `mainPanel`) in 5 Bereiche: oben (`NORTH`), unten (`SOUTH`), links (`WEST`), rechts (`EAST`) und die Mitte (`CENTER`). Da unsere Bereiche untereinander liegen, haben wir oben (`NORTH`) und unten (`SOUTH`) gewählt. `GAP` ist der Abstand zwischen den Elementen.
+Die Anordnung der 2 Bereiche (Spielfeld und Kontrollbereich) erfolgt mit Hilfe des [BorderLayouts](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/java/awt/BorderLayout.html), dass den jeweiligen Bereich (bei uns `mainPanel`) in 5 Bereiche aufteilt: oben (`NORTH`), unten (`SOUTH`), links (`WEST`), rechts (`EAST`) und die Mitte (`CENTER`). Da unsere Bereiche untereinander liegen, haben wir oben (`NORTH`) und unten (`SOUTH`) gewählt. `GAP` ist der Abstand zwischen den Elementen.
 
 ```java
 private void initFrame() {
@@ -202,7 +202,7 @@ Die Bilder für die Anzeige kannst du in hier downloaden:
 
 [TicTacToe_Images.tar](uploads/3160fa40d9bbe6797aea3d51a70f7da9/TicTacToe_Images.tar)
 
-Der Code für unsere eigene `JButtonTicTacToe` schaut wie folgt aus:
+Der Code für unsere eigene `JButtonTicTacToe` Klasse schaut wie folgt aus:
 ```java
 public class JButtonTicTacToe extends JButton {
 
@@ -278,7 +278,7 @@ Unser GUI schaut jetzt wie folgt aus:
 
 ## Die Control Buttons
 
-Die Buttons für die Spielsteuerung ganz ähnlich zu den Buttons des Spielfelds in der `initFrame()` Methode hinzugefügt. Wir haben 2 Buttons:
+Die Buttons für die Spielsteuerung werden wie die Buttons des Spielfelds in der `initFrame()` Methode hinzugefügt. Wir haben 2 Buttons:
 1) **RESET**: startet ein neues Speil
 2) **EXIT**: beendet das Programm mit **System.exit(0)**
 
@@ -297,7 +297,7 @@ exitButton.addActionListener(e -> System.exit(0));
 ctrlPanel.add(exitButton);
 ```
 
-Auch hier wird der `ActionListener` für das Zurücksetzen des Spiels erst später behandelt. Der **Exit** Button kann das Programm aber schon beenden.
+Auch hier wird der `ActionListener` für das Zurücksetzen des Spiels erst später behandelt. Der **Exit** Button kann das Programm aber schon jetzt beenden.
 
 ![GUI_CTRL](uploads/506583b85710a925d13549bfc1a58df9/GUI_CTRL.png)
 
@@ -318,9 +318,11 @@ public static void main(String[] args) {
 }
 ```
 
-Anstatt der fixen Fenstergröße (500x500) geben wir mit  **frame.pack()** an, dass sich unser Frame der Größe des Inhalts anpassen soll. Zusätzlich wollen wir, dass der Benutzer die Größe unseres Fensters nicht ändern darf (**frame.setResizable(false)**) und das Fenster zentriert am Monitor geöffnet werden soll (**frame.setLocationRelativeTo(null)**). Zusätzlich können wir die Farben, die wir nur für die Sichtbarkeit des Layouts eingeführt haben (Gelb und Rot) auskommentieren.
+Anstatt der fixen Fenstergröße (500x500) geben wir mit  **frame.pack()** an, dass sich unser Frame der Größe des Inhalts anpassen soll. Zusätzlich wollen wir, dass der Benutzer die Größe unseres Fensters nicht ändern darf (**frame.setResizable(false)**) und das Fenster zentriert am Monitor geöffnet werden soll (**frame.setLocationRelativeTo(null)**). 
 
-Zu allerletzt können wir noch das Icon links oben im Fenster ändern:
+Da wir mit dem Design jetzt fertig sind, können wir die Farben, die wir nur für die Sichtbarkeit des Layouts eingeführt haben (Gelb und Rot), auskommentieren.
+
+Zu allerletzt wollen wir das Icon links oben im Fenster ändern:
 ```
 public TicTacToeGUI() {
     super("TicTacToe das Spiel !!!");
