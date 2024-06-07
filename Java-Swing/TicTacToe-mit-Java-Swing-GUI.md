@@ -454,6 +454,8 @@ private void resetBoardButtons() {
 
 **ACHTUNG** nicht vergessen den `ActionListener` für den Reset Button zu aktivieren (Kommentar entfernen)!
 
-Jetzt sollte unsere GUI voll einsatzbereit sein. Die Files für die GUI können hier heruntergeladen werden:
+Jetzt sollte unsere GUI voll einsatzbereit sein.
+
+Eine Beispielimplementierung des Spiels kann unter folgendem Link downgeloadet werden:
 
 [TicTacToe_GUI.tar](uploads/5eeb8c331fc5e617677f1d0c7aefa204/TicTacToe_GUI.tar)
