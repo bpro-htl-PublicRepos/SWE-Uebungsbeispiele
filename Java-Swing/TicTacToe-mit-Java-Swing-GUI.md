@@ -49,9 +49,9 @@ Da TicTacToe sehr einfach ist, werden wir auf die Klasse Token verzichten und de
 
 # Das Klassendiagramm
 
-![Beispiel_OOP_TicTacToe_Klassendiagramm](uploads/ddb941ad2cd3f3cae76d567e12c6a0dc/Beispiel_OOP_TicTacToe_Klassendiagramm.png)
+![Beispiel_OOP_TicTacToe_Klassendiagramm](uploads/8a1d50ce32d97180c48892b08cc06038/Beispiel_OOP_TicTacToe_Klassendiagramm.png)
 
-[Beispiel_OOP_TicTacToe_Klassendiagramm.pdf](uploads/32ab11b6cc3ee5c17a65d1949abfa51d/Beispiel_OOP_TicTacToe_Klassendiagramm.pdf)
+[Beispiel_OOP_TicTacToe_Klassendiagramm.pdf](uploads/eee9d72895bd0a7b070d6ee6f154507f/Beispiel_OOP_TicTacToe_Klassendiagramm.pdf)
 
 # Die Klassen im Detail
 
