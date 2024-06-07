@@ -345,14 +345,14 @@ Nachdem wir die passende GUI für unser Spiel erstellt haben, können wir uns de
 ```java
 private Game game;
 ```
-2) Eine Methode **initGame()**, die das Spiel für uns initialisiert:
+2) Eine Methode die das Spiel für uns initialisiert:
 ```java
 private void initGame() {
     this.game = new Game("Spieler 1", "Spieler 2");
 }
 ```
 3) Einen `ActionListener`, der auf Klicks auf die Felder des Spielfelds reagiert:
-4) Eine Methode **resetGame()**, die das Spiel zurücksetzt:
+4) Eine Methode **resetGame()** die das Spiel zurücksetzt:
 5) Die Initialisierung des Spiels im Konstruktor:
 ```java
 public TicTacToeGUI() {
@@ -375,6 +375,8 @@ Die Klicks auf die Buttons des Spielfelds sind für den [Ablauf des Spiels](#Spi
 
 Wir wollen diesen Ablauf schrittweise in unsere Benutzeroberfläche einbauen.
 
+### Spiellogik Schritt 1: Setzen von Spielsteinen
+
 Als erstes wollen wir auf Klicks des Spielers reagieren und das Symbol des jeweiligen Spielers anzeigen. Dafür erstellen wir eine Funktion **actionOnBoardButtonPressed()**, die den jeweiligen Button als Argument übernimmt. Wenn das Feld noch frei ist, so soll das Zeichen gesetzt, und der nächste Spieler ausgewählt werden. Die dafür notwendigen Methoden stellt uns die Klasse **Game** zur Verfügung:
 ```java
 private void actionOnBoardButtonPressed(JButtonTicTacToe button) {
@@ -390,6 +392,8 @@ private void actionOnBoardButtonPressed(JButtonTicTacToe button) {
 ```
 
 **ACHTUNG** nicht vergessen den `ActionListener` beim Anlegen der Buttons zu aktivieren (Kommentar entfernen)!
+
+### Spiellogik Schritt 2: Prüfen ob das Spiel zu Ende ist
 
 Im nächsten Schritt wollen wir prüfen ob das Spiel zu Ende ist (Sieg oder Unentschieden). Diese Überprüfung muss vor dem Spielerwechsel eingefügt werden:
 ```java
