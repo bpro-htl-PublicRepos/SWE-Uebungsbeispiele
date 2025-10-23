@@ -270,7 +270,7 @@ for (int i = 0; i < size; i++) {
 }
 ```
 
-Im Gegensatz zum `BorderLayout` kann man beim [GridLayout](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/java/awt/GridLayout.html) die Anzahl der Felder (Zeilen und Spalten) selber definieren. Da TicTacToe auf einem 3x3 Spielfeld gespielt wird, hat auch unser Grid eine größe von 3x3. Die hinzugefügten Buttons werden dann automatisch Feld für Feld zeilenweise hinzugefügt. Der `ActionListener` ist noch auskommentiert und wird später im Tutorium beschrieben.
+Im Gegensatz zum `BorderLayout` kann man beim [GridLayout](https://docs.oracle.com/en/java/javase/20/docs/api/java.desktop/java/awt/GridLayout.html) die Anzahl der Felder (Zeilen und Spalten) selber definieren. Da TicTacToe auf einem 3x3 Spielfeld gespielt wird, hat auch unser Grid eine Größe von 3x3. Die hinzugefügten Buttons werden dann automatisch Feld für Feld zeilenweise hinzugefügt. Der `ActionListener` ist noch auskommentiert und wird später im Tutorium beschrieben.
 
 Unser GUI schaut jetzt wie folgt aus:
 
